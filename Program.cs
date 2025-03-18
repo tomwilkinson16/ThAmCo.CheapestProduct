@@ -36,7 +36,7 @@ else
 {
     builder.Services.AddHttpClient<ILowestPriceService, LowestProducts>(client =>
     {
-        client.BaseAddress = new Uri("https://localhost:7004");
+        client.BaseAddress = new Uri(builder.Configuration["LowestProducts:Uri"]);
     });
 }
 
