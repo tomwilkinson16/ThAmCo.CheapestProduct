@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iRKwcjKhx7s=",
+  "dgSpecHash": "u7IYMKCxFGs=",
   "success": true,
-  "projectFilePath": "/Users/tom/DevOps/ThAmCo.CheapestProduct/ThAmCo.CheapestProduct.csproj",
+  "projectFilePath": "/Users/tom/Downloads/ThAmCo.CheapestProduct/ThAmCo.CheapestProduct.csproj",
   "expectedPackageFiles": [
     "/Users/tom/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/Users/tom/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",

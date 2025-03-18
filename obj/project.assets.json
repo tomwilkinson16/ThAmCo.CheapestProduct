@@ -4481,11 +4481,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/tom/DevOps/ThAmCo.CheapestProduct/ThAmCo.CheapestProduct.csproj",
+      "projectUniqueName": "/Users/tom/Downloads/ThAmCo.CheapestProduct/ThAmCo.CheapestProduct.csproj",
       "projectName": "ThAmCo.CheapestProduct",
-      "projectPath": "/Users/tom/DevOps/ThAmCo.CheapestProduct/ThAmCo.CheapestProduct.csproj",
+      "projectPath": "/Users/tom/Downloads/ThAmCo.CheapestProduct/ThAmCo.CheapestProduct.csproj",
       "packagesPath": "/Users/tom/.nuget/packages/",
-      "outputPath": "/Users/tom/DevOps/ThAmCo.CheapestProduct/obj/",
+      "outputPath": "/Users/tom/Downloads/ThAmCo.CheapestProduct/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/tom/.nuget/NuGet/NuGet.Config"
