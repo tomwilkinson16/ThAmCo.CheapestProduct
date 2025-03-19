@@ -6,12 +6,6 @@ using Microsoft.Extensions.Logging; // Add this using directive
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure logging
-builder.Logging.ClearProviders()
-               .AddConsole()
-               .AddDebug()
-               .AddAzureWebAppDiagnostics(); // Add Azure Web App diagnostics
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -30,11 +24,7 @@ builder.Services.AddMemoryCache();
 
 if (builder.Environment.IsDevelopment())
 {
-    // builder.Services.AddSingleton<ILowestPriceService, LowestPriceServiceFake>();
-    builder.Services.AddHttpClient<ILowestPriceService, LowestProducts>(client =>
-    {
-        client.BaseAddress = new Uri(builder.Configuration["LowestProducts:Uri"]);
-    });
+    builder.Services.AddScoped<ILowestPriceService, LowestPriceServiceFake>();
 }
 else
 {
