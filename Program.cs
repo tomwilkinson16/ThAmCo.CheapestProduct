@@ -6,7 +6,9 @@ using ThAmCo.CheapestProducts.Services.CheapestProduct;
 
 
 var builder = WebApplication.CreateBuilder(args);
- 
+
+builder.Logging.ClearProviders().AddConsole().AddDebug().AddAzureWebAppDiagnostics();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -64,3 +66,4 @@ public record WeatherForecast
 
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
