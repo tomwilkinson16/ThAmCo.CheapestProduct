@@ -38,9 +38,8 @@ namespace ThAmCo.CheapestProduct.Controllers
             {
                     _logger.LogWarning(ex, "Failed to get products");
                     products = Array.Empty<LowestProductDto>();
-                    return StatusCode(500, products);
+                    return StatusCode(505, products);
             }
         }
-         
     }
 }
