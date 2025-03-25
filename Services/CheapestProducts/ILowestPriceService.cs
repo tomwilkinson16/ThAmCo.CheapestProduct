@@ -4,6 +4,7 @@ namespace ThAmCo.CheapestProducts.Services.CheapestProduct
 {
     public interface ILowestPriceService
     {
-        Task<IEnumerable<LowestProductDto>> GetLowestPriceAsync(int? price);
+        public Task<IEnumerable<LowestProductDto>> GetLowestPriceAsync();
+        public Task<LowestProductDto> GetLowestPriceAsync(int id);
     }
 }

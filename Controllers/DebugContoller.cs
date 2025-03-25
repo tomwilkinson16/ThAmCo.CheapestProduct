@@ -31,7 +31,7 @@ namespace ThAmCo.CheapestProduct.Controllers
             try
             {
                 // products = await _lowestPriceService.GetLowestPriceAsync(0);
-                return Ok(await _lowestPriceService.GetLowestPriceAsync(0));
+                return Ok(await _lowestPriceService.GetLowestPriceAsync());
 
             }
             catch (Exception ex)
@@ -39,6 +39,24 @@ namespace ThAmCo.CheapestProduct.Controllers
                     _logger.LogWarning(ex, "Failed to get products");
                     products = Array.Empty<LowestProductDto>();
                     return StatusCode(505, products);
+            }
+        }
+        //get single product
+        [HttpGet("CheapestProducts/{id}")]
+        [Authorize]
+        public async Task<IActionResult> Product(int id)
+        {
+            LowestProductDto product = null!;
+            try
+            {
+                // product = await _lowestPriceService.GetLowestPriceAsync(id);
+                return Ok(await _lowestPriceService.GetLowestPriceAsync(id));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to get product");
+                product = new LowestProductDto();
+                return StatusCode(505, product);
             }
         }
     }

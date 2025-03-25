@@ -23,13 +23,8 @@ namespace ThAmCo.CheapestProduct.Services.CheapestProducts
 
 
 
-        public async Task<IEnumerable<LowestProductDto>> GetLowestPriceAsync(int? price)
-        {
-            if (price == null)
-            {
-                throw new ArgumentNullException(nameof(price));
-            }
-            
+        public async Task<IEnumerable<LowestProductDto>> GetLowestPriceAsync()
+        {   
             var totalClient = _httpClientFactory.CreateClient();
             totalClient.BaseAddress = new Uri(_configuration["TokenAuthority"]);
             var tokenParams = new Dictionary <string, string>
@@ -76,6 +71,56 @@ namespace ThAmCo.CheapestProduct.Services.CheapestProducts
             }
 
             return lowestProductList;
+        }
+        //get a single product
+        public async Task<LowestProductDto> GetLowestPriceAsync(int id)
+        {
+            var response = await _httpclient.GetAsync($"debug/repo/{id}");
+            var productcontextcontentString = await response.Content.ReadAsStringAsync();
+            var product = JsonSerializer.Deserialize<LowestProductDto>(productcontextcontentString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            if (product == null)
+            {
+                throw new InvalidOperationException("Failed to deserialize product.");
+            }
+
+            return product;
+        }
+
+        async Task<LowestProductDto> ILowestPriceService.GetLowestPriceAsync(int id)
+        {
+            var totalClient = _httpClientFactory.CreateClient();
+            totalClient.BaseAddress = new Uri(_configuration["TokenAuthority"]);
+            var tokenParams = new Dictionary <string, string>
+            {
+                {"client_id", _configuration["ClientId"]},
+                {"client_secret", _configuration["ClientSecret"]},
+                {"grant_type", "client_credentials"},
+                {"audience", _configuration["Audience"]}
+            };
+
+            
+            var tokenForm = new FormUrlEncodedContent(tokenParams);
+            var tokenResponse = await totalClient.PostAsync("oauth/token", tokenForm);
+            var contentString = await tokenResponse.Content.ReadAsStringAsync();
+            var token = JsonSerializer.Deserialize<TokenDto>(contentString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            _httpclient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+            var response = await _httpclient.GetAsync("debug/repo");
+            var productcontextcontentString = await response.Content.ReadAsStringAsync();
+            var products = JsonSerializer.Deserialize<IEnumerable<LowestProductDto>>(productcontextcontentString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            if (products == null)
+            {
+                throw new InvalidOperationException("Failed to deserialize products.");
+            }
+
+            // Dictionary to store grouped results
+            Dictionary<string, List<LowestProductDto>> lowestProduct = new Dictionary<string, List<LowestProductDto>>();
+            
+            List<LowestProductDto> lowestProductList = new List<LowestProductDto>();
+
+            return products.FirstOrDefault(p => p.Id == id);
         }
     }
 }
