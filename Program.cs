@@ -24,7 +24,11 @@ builder.Services.AddMemoryCache();
 
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddScoped<ILowestPriceService, LowestPriceServiceFake>();
+    // builder.Services.AddScoped<ILowestPriceService, LowestPriceServiceFake>();
+    builder.Services.AddHttpClient<ILowestPriceService, LowestProducts>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["LowestProducts:Uri"]);
+    });
 }
 else
 {
