@@ -349,3 +349,7 @@
 /Users/tom/Downloads/ThAmCo.CheapestProduct/bin/Debug/net8.0/System.Text.Encodings.Web.dll
 /Users/tom/Downloads/ThAmCo.CheapestProduct/bin/Debug/net8.0/System.Text.Json.dll
 /Users/tom/Downloads/ThAmCo.CheapestProduct/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
+/Users/tom/Downloads/ThAmCo.CheapestProduct/bin/Debug/net8.0/Castle.Core.dll
+/Users/tom/Downloads/ThAmCo.CheapestProduct/bin/Debug/net8.0/Moq.dll
+/Users/tom/Downloads/ThAmCo.CheapestProduct/bin/Debug/net8.0/nunit.framework.dll
+/Users/tom/Downloads/ThAmCo.CheapestProduct/bin/Debug/net8.0/nunit.framework.legacy.dll
