@@ -1,25 +1,20 @@
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using ThAmCo.CheapestProducts.Services.CheapestProduct;
 
 namespace ThAmCo.CheapestProduct.Controllers
-{    
+{
     [ApiController]
     [Route("[controller]")]
     [Authorize]
     public class DebugController : ControllerBase
     {
-        private readonly ILogger _logger;
         private readonly ILowestPriceService _lowestPriceService;
 
-        public DebugController(ILogger<DebugController> logger, 
-                                    ILowestPriceService lowestPriceService)
+        public DebugController(ILowestPriceService lowestPriceService)
         {
-            _logger = logger;
             _lowestPriceService = lowestPriceService;
         }
 
@@ -30,18 +25,15 @@ namespace ThAmCo.CheapestProduct.Controllers
             IEnumerable<LowestProductDto> products = null!;
             try
             {
-                // products = await _lowestPriceService.GetLowestPriceAsync(0);
                 return Ok(await _lowestPriceService.GetLowestPriceAsync());
-
             }
-            catch (Exception ex)
+            catch
             {
-                    _logger.LogWarning(ex, "Failed to get products");
-                    products = Array.Empty<LowestProductDto>();
-                    return StatusCode(505, products);
+                products = Array.Empty<LowestProductDto>();
+                return StatusCode(505, products);
             }
         }
-        //get single product
+
         [HttpGet("CheapestProducts/{id}")]
         [Authorize]
         public async Task<IActionResult> Product(int id)
@@ -49,12 +41,10 @@ namespace ThAmCo.CheapestProduct.Controllers
             LowestProductDto product = null!;
             try
             {
-                // product = await _lowestPriceService.GetLowestPriceAsync(id);
                 return Ok(await _lowestPriceService.GetLowestPriceAsync(id));
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogWarning(ex, "Failed to get product");
                 product = new LowestProductDto();
                 return StatusCode(505, product);
             }
